@@ -7,23 +7,27 @@ import axios from "axios";
 
 function App() {
     const [products, setProduct] = useState([
-        {id: 'uuid-1', productName: '콜롬비아 커피 1', category: '커피빈', price: 3000},
-        {id: 'uuid-2', productName: '콜롬비아 커피 2', category: '커피빈', price: 4000},
-        {id: 'uuid-3', productName: '콜롬비아 커피 3', category: '커피빈', price: 5000}
+        {productId: 'uuid-1', productName: '콜롬비아 커피 1', category: '커피빈', price: 3000},
+        {productId: 'uuid-2', productName: '콜롬비아 커피 2', category: '커피빈', price: 4000},
+        {productId: 'uuid-3', productName: '콜롬비아 커피 3', category: '커피빈', price: 5000}
     ]);
 
     const [items, setItems] = useState([]);
-    const handelAddClicked = id => {
-        const product = products.find(v => v.id == id);
-        const found = items.find(v => v.id == id);
+    const handelAddClicked = productId => {
+        const product = products.find(v => v.productId == productId);
+        const found = items.find(v => v.productId == productId);
         const updatedItems =
-            found ? items.map(v => (v.id == id) ? { ...v, count: v.count + 1 } : v) : [...items, { ...product, count: 1}]
+            found ? items.map(v => (v.productId == productId) ? { ...v, count: v.count + 1 } : v) : [...items, { ...product, count: 1}]
         setItems(updatedItems);
     }
     useEffect(() => {
         axios.get('http://localhost:8080/api/v1/products')
             .then(v => setProduct(v.data));
     }, []);
+
+    const handleOrderSubmit = (order) => {
+        console.log(order, items);
+    }
 
     return (
         <div className="container-fluid">
@@ -36,7 +40,7 @@ function App() {
                         <ProductList products={products} onAddClick={handelAddClicked}/>
                     </div>
                     <div className="col-md-4 summary p-4">
-                        <Summary itmes={items}/>
+                        <Summary itmes={items} onOrderSubmit={handleOrderSubmit}/>
                     </div>
                 </div>
             </div>
