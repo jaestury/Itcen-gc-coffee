@@ -14,19 +14,42 @@ function App() {
 
     const [items, setItems] = useState([]);
     const handelAddClicked = productId => {
-        const product = products.find(v => v.productId == productId);
-        const found = items.find(v => v.productId == productId);
+        const product = products.find(v => v.productId === productId);
+        const found = items.find(v => v.productId === productId);
         const updatedItems =
-            found ? items.map(v => (v.productId == productId) ? { ...v, count: v.count + 1 } : v) : [...items, { ...product, count: 1}]
+            found ? items.map(v => (v.productId === productId) ? {
+                ...v,
+                count: v.count + 1
+            } : v) : [...items, {...product, count: 1}]
         setItems(updatedItems);
     }
+
     useEffect(() => {
         axios.get('http://localhost:8080/api/v1/products')
             .then(v => setProduct(v.data));
     }, []);
 
     const handleOrderSubmit = (order) => {
-        console.log(order, items);
+        if (items.length === 0) {
+            alert("아이템을 추가해주세요!")
+        } else {
+            axios.post('http://localhost:8080/api/v1/orders', {
+                email: order.email,
+                address: order.address,
+                postcode: order.postcode,
+                orderItems: items.map(v => ({
+                    productId: v.productId,
+                    category: v.category,
+                    price: v.price,
+                    quantity: v.count
+                }))
+            }).then(
+                v => alert("주문이 정상적으로 접수되었습니다."),
+                e => {
+                    alert("서버 장애")
+                    console.error(e);
+                })
+        }
     }
 
     return (
@@ -40,7 +63,7 @@ function App() {
                         <ProductList products={products} onAddClick={handelAddClicked}/>
                     </div>
                     <div className="col-md-4 summary p-4">
-                        <Summary itmes={items} onOrderSubmit={handleOrderSubmit}/>
+                        <Summary items={items} onOrderSubmit={handleOrderSubmit}/>
                     </div>
                 </div>
             </div>
