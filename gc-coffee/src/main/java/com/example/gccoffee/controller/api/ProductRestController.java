@@ -24,10 +24,4 @@ public class ProductRestController {
                 .map(productService::getProductByCategory)
                 .orElse(productService.getAllProducts());
     }
-
-    @DeleteMapping("/api/v1/products")
-    public UUID delete(@PathVariable UUID uuid){
-        productService.deleteProduct(uuid);
-        return uuid;
-    }
 }

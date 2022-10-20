@@ -13,21 +13,23 @@
 </head>
 <body class="container-fluid">
 <h1>Grids & Circles</h1>
-<h2>Production Management</h2>
+<h2>제품 관리</h2>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a th:href="@{/new-product}" class="btn btn-primary me-md-2" type="button">Add Product</a>
-    <button id="btn-delete" class="btn btn-primary me-md-2" type="button">Product Delete</button>
+    <a th:href="@{/new-product}" class="btn btn-primary me-md-2" type="button">제품 추가</a>
+    <a th:href="@{/new-product}" class="btn btn-primary me-md-2" type="button">제품 수정</a>
+    <a th:href="@{/new-product}" class="btn btn-primary me-md-2" type="button">제품 삭제</a>
 </div>
 <table class="table table-hover table-striped">
     <thead>
     <th></th>
-    <th scope="col">Id</th>
-    <th scope="col">name</th>
-    <th scope="col">category</th>
-    <th scope="col">price</th>
-    <th scope="col">description</th>
-    <th scope="col">createdAt</th>
-    <th scope="col">updatedAt</th>
+    <th scope="col">제품 ID</th>
+    <th scope="col">제품명</th>
+    <th scope="col">카테고리</th>
+    <th scope="col">가격</th>
+    <th scope="col">설명</th>
+    <th scope="col">생성시간</th>
+    <th scope="col">변경시간</th>
+    <th></th>
     </thead>
     <tbody>
     <tr th:each="product: ${products}" th:object="${product}">

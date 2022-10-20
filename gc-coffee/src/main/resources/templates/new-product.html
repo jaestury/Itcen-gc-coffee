@@ -14,6 +14,7 @@
 <h1>Grids & Circles</h1>
 <h2>Production Management</h2>
 <form th:action="@{/products}" method="post">
+    <div>
     <div class="mb-3">
         <label for="productName" class="form-label">Name</label>
         <input type="text" class="form-control" id="productName" name="productName">
@@ -34,7 +35,8 @@
         <label for="description" class="form-label">Description</label>
         <textarea class="form-control" id="description" name="description" rows="3"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" id="btn-save" class="btn btn-primary">등록</button>
+    </div>
 </form>
 </body>
 </html>
