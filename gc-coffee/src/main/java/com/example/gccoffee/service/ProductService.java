@@ -4,6 +4,7 @@ import com.example.gccoffee.model.Category;
 import com.example.gccoffee.model.Product;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ProductService {
 
@@ -15,4 +16,5 @@ public interface ProductService {
 
     Product createProduct(String productName, Category category, long price, String description);
 
+    Product deleteProduct(UUID uuid);
 }

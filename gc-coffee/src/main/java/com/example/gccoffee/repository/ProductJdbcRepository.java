@@ -65,7 +65,8 @@ public class ProductJdbcRepository implements ProductRepository {
     public Optional<Product> findByName(String productName) {
         try{
             return Optional.ofNullable(
-                    jdbcTemplate.queryForObject("SELECT * FROM products WHERE product_name = :productName",
+                    jdbcTemplate.queryForObject(
+                            "SELECT * FROM products WHERE product_name = :productName",
                             Collections.singletonMap("productName", productName), productRowMapper)
             );
         }catch (EmptyResultDataAccessException e){
@@ -80,6 +81,12 @@ public class ProductJdbcRepository implements ProductRepository {
                 Collections.singletonMap("category", category.toString()),
                 productRowMapper
         );
+    }
+
+    @Override
+    public Product deleteProduct() {
+//        jdbcTemplate.update("DELETE FROM products", Collections.emptyMap());
+        return null;
     }
 
     @Override

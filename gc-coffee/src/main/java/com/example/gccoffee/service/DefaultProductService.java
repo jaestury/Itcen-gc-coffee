@@ -39,4 +39,11 @@ public class DefaultProductService implements ProductService {
         var product = new Product(UUID.randomUUID(), productName, category, price, description, LocalDateTime.now(), LocalDateTime.now());
         return productRepository.insert(product);
     }
+
+    @Override
+    public Product deleteProduct(UUID uuid){
+        return productRepository.deleteProduct();
+
+    }
+
 }

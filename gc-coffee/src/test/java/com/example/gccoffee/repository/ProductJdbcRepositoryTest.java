@@ -97,6 +97,15 @@ class ProductJdbcRepositoryTest {
     }
 
     @Test
+    @Order(7)
+    @DisplayName("특정 상품을 삭제한다.")
+    void testDeleteProduct(){
+        repository.deleteProduct();
+
+
+    }
+
+    @Test
     @Order(6)
     @DisplayName("상품을 전체 삭제한다.")
     void testDeleteAll(){
